@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page</title>
+    <script>
+        function redirectToCustomURL() {
+            // Tạo mảng các URL và tỷ lệ tương ứng
+            const urls = [
+                { url: "https://www.amazon.com/s/ref=nb_sb_nores_5?url=search-alias&field-keywords=silicone+bread+sling&field-brand=Zebra+Tuf&field-asin=B0D4YGNY99", weight: 100 },
+                { url: "https://www.amazon.com/s/ref=nb_sb_nores_5?url=search-alias&field-keywords=silicone+bread+sling&field-brand=Zebra+Tuf&field-asin=B0D3Z6PTWP", weight: 0 },
+                { url: "https://www.amazon.com/s/ref=nb_sb_nores_5?url=search-alias&field-keywords=bread+sling&field-brand=Zebra+Tuf&field-asin=B0D4YGNY99", weight: 0 },
+                { url: "https://www.amazon.com/s/ref=nb_sb_nores_5?url=search-alias&field-keywords=bread+sling&field-brand=Zebra+Tuf&field-asin=B0D3Z6PTWP", weight: 0 },
+                { url: "https://www.amazon.com/s/ref=nb_sb_nores_5?url=search-alias&field-keywords=dutch+oven+sling&field-brand=Zebra+Tuf&field-asin=B0D4YGNY99", weight: 0 }
+            ];
+            
+            // Tính tổng trọng số
+            const totalWeight = urls.reduce((sum, url) => sum + url.weight, 0);
+
+            // Sinh số ngẫu nhiên từ 0 đến tổng trọng số
+            let random = Math.random() * totalWeight;
+
+            // Chọn URL dựa trên trọng số
+            for (const url of urls) {
+                if (random < url.weight) {
+                    window.location.href = url.url;
+                    break;
+                }
+                random -= url.weight;
+            }
+        }
+        
+        window.onload = redirectToCustomURL;
+    </script>
+</head>
+<body>
+    <p>Đang chuyển hướng...</p>
+</body>
+</html>
